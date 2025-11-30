@@ -1,25 +1,30 @@
 class BankAccount:
     def __init__(self, initial_balance=0):
-        self.account_balance = initial_balance
-    
+        self.__account_balance = initial_balance  # Encapsulation with private attribute
+
     def deposit(self, amount):
-        self.account_balance += amount
-    
+        if amount > 0:
+            self.__account_balance += amount
+        else:
+            print("Deposit amount must be positive.")
+
     def withdraw(self, amount):
-        if self.account_balance >= amount:
-            self.account_balance -= amount
+        if amount <= self.__account_balance:
+            self.__account_balance -= amount
             return True
-        return False
-    
+        else:
+            return False
+
     def display_balance(self):
-        print(f"Current Balance: ${self.account_balance}")
-        import sys
+        print(f"Current Balance: ${self.__account_balance}")
+import sys
 from bank_account import BankAccount
 
 def main():
-    account = BankAccount(100)
+    account = BankAccount(100)  # Example starting balance
+
     if len(sys.argv) < 2:
-        print("Usage: python main.py <command>:<amount>")
+        print("Usage: python main-0.py <command>:<amount>")
         print("Commands: deposit, withdraw, display")
         sys.exit(1)
 
